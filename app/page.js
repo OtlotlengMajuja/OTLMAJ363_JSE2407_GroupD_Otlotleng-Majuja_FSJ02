@@ -1,6 +1,9 @@
 import { getProducts } from './lib/api';
 import ProductGrid from './components/ProductGrid';
 import Pagination from './components/Pagination';
+import SearchBar from './components/SearchBar';
+import FilterByCategory from './components/FilterCategory';
+import SortOptions from './components/SortOptions';
 import { Suspense } from 'react';
 
 /**
@@ -14,12 +17,17 @@ import { Suspense } from 'react';
  */
 export default async function Home({ searchParams }) {
   const page = Number(searchParams.page) || 1; // Determine the current page number
+  const search = searchParams.search || '';
+  const category = searchParams.category || '';
+  const sort = searchParams.sort || '';
+  const limit = 20;
+
   let products;
   let error;
 
   try {
     // Fetch products for the current page
-    products = await getProducts(page);
+    products = await getProducts({ page, limit, search, category, sort });
   } catch (error) {
     error = error.message; // Capture and handle any errors
   }
@@ -32,6 +40,9 @@ export default async function Home({ searchParams }) {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
+        <SearchBar initialValue={search} />
+        <FilterByCategory initialValue={category} />
+        <SortOptions initialValue={sort} />
         {/* Render the product grid and pagination controls */}
         <ProductGrid products={products} />
         <Pagination currentPage={page} hasMore={products.length === 20} />
