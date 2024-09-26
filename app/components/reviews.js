@@ -45,7 +45,7 @@ export default function Reviews({ reviews }) {
                         <div className="flex justify-between items-center mb-4">
                             <span className="font-semibold text-lg text-black">{review.reviewerName}</span>
                             <span className="text-sm text-green-600">
-                                {new Date(review.date).toLocaleDateString()}
+                                {new Date(review.date).toLocaleDateString('en-GB')}
                             </span>
                         </div>
                         <div className="flex items-center mb-2">

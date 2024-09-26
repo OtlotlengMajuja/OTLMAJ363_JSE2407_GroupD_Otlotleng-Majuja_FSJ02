@@ -2,6 +2,7 @@ import { getProductById } from '@/app/lib/api';
 import Link from 'next/link';
 import ImageGallery from '@/app/components/gallery';
 import Reviews from '@/app/components/reviews';
+import Error from '@/app/error';
 
 /**
  * ProductPage component that fetches and displays a single product's details.
@@ -26,7 +27,7 @@ export default async function ProductPage({ params, searchParams }) {
 
     // Display an error message if fetching product fails
     if (error) {
-        return <div className="text-red-500 text-center p-4">Error: {error}</div>;
+        return <Error error={error} reset={fetchProducts} />;
     }
 
     // Sort reviews based on the reviewSort parameter
@@ -56,7 +57,7 @@ export default async function ProductPage({ params, searchParams }) {
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="md:flex">
                     {/* Display product images using ImageGallery component or fallback */}
-                    <div className="md:w-1/2">
+                    <div className="md:w-1/2 object-contain">
                         {product.images && product.images.length > 0 ? (
                             <ImageGallery images={product.images} />
                         ) : (

@@ -51,7 +51,7 @@ export default function ProductCard({ product }) {
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Link to the product details page */}
             <Link href={buildProductLink()}>
-                <div className="relative">
+                <div className="relative object-contain">
                     {/* Display the current image of the product */}
                     <Image
                         src={product.images[currentImageIndex] || product.thumbnail}
