@@ -1,13 +1,6 @@
 'use client';
-import { useRouter } from 'next/navigation';
 
 export default function ResetFilters({ onReset }) {
-    const router = useRouter();
-
-    const handleReset = () => {
-        router.push('/');
-    };
-
     return (
         <button
             onClick={onReset}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import ProductCard from './productCard';
+import ProductCard from './ProductCard';
 
 /**
  * ProductGrid component that displays a grid of products using the ProductCard component.

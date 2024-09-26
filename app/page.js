@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getProducts, getCategories } from './lib/api';
@@ -23,7 +21,7 @@ import Loading from './loading';
  */
 export default function Home({ searchParams }) {
   const router = useRouter();
-  const queryParams = useSearchParams();
+  const searchParams = useSearchParams();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -1,15 +1,6 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function SortOptions({ initialValue, onSortChange }) {
-    const [sort, setSort] = useState(initialValue);
-    const router = useRouter();
-
-    useEffect(() => {
-        router.push(`/?sort=${encodeURIComponent(sort)}`);
-    }, [sort, router]);
-
     return (
         <select
             value={initialValue}
