@@ -100,17 +100,27 @@ export default function Home() {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <h1 className="text-3xl font-bold mb-8">Explore the best store</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center sm:text-left">Explore the best store</h1>
 
-      <div className="flex flex-wrap gap-4 mb-8">
-        <SearchBar initialValue={search} onSearchChange={handleSearchChange} />
-        <FilterByCategory
-          categories={categories}
-          selectedCategory={category}
-          onCategoryChange={handleCategoryChange}
-        />
-        <SortOptions initialValue={sort} onSortChange={handleSortChange} />
-        {hasFilters && <ResetFilters onReset={handleResetFilters} />}
+      <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
+        <div className="w-full sm:w-auto">
+          <SearchBar initialValue={search} onSearchChange={handleSearchChange} />
+        </div>
+        <div className="w-full sm:w-auto">
+          <FilterByCategory
+            categories={categories}
+            selectedCategory={category}
+            onCategoryChange={handleCategoryChange}
+          />
+        </div>
+        <div className="w-full sm:w-auto">
+          <SortOptions initialValue={sort} onSortChange={handleSortChange} />
+        </div>
+        {hasFilters && (
+          <div className="w-full sm:w-auto">
+            <ResetFilters onReset={handleResetFilters} />
+          </div>
+        )}
       </div>
 
       {/* Render the product grid and pagination controls */}

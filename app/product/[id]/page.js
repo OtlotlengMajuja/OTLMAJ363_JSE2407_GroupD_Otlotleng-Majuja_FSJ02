@@ -5,6 +5,22 @@ import Reviews from '@/app/components/reviews';
 import Error from '@/app/error';
 
 /**
+ * Generates metadata for the product page.
+ *
+ * @param {Object} props - The properties passed to the function.
+ * @param {Object} props.params - The route parameters.
+ * @param {string} props.params.id - The ID of the product.
+ * @returns {Promise<Object>} The metadata object containing title and description.
+ */
+export async function generateMetadata({ params }) {
+    const product = await getProductById(params.id);
+    return {
+        title: product.title,
+        description: product.description,
+    };
+}
+
+/**
  * ProductPage component that fetches and displays a single product's details.
  *
  * @param {Object} props - The properties passed to the ProductPage component.
@@ -12,6 +28,7 @@ import Error from '@/app/error';
  * @param {string} props.params.id - The ID of the product to be displayed.
  * @returns {JSX.Element} The product detail page, including product images, details, reviews, and error handling.
  */
+
 export default async function ProductPage({ params, searchParams }) {
     const { id } = params;  // Extract product ID from URL parameters
     const { reviewSort } = searchParams;
@@ -27,7 +44,7 @@ export default async function ProductPage({ params, searchParams }) {
 
     // Display an error message if fetching product fails
     if (error) {
-        return <Error error={error} reset={fetchProducts} />;
+        return <Error error={error} reset={() => { }} />;
     }
 
     // Sort reviews based on the reviewSort parameter
@@ -57,7 +74,7 @@ export default async function ProductPage({ params, searchParams }) {
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="md:flex">
                     {/* Display product images using ImageGallery component or fallback */}
-                    <div className="md:w-1/2 object-contain">
+                    <div className="md:w-1/2">
                         {product.images && product.images.length > 0 ? (
                             <ImageGallery images={product.images} />
                         ) : (

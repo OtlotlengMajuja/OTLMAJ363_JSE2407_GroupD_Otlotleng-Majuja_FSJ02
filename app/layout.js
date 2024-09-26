@@ -1,5 +1,8 @@
 import "./globals.css";
 import Header from './components/header';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: "Shopporium",
@@ -20,15 +23,15 @@ export default function RootLayout({ children }) {
       <head>
         {/* Preconnects to Google Fonts to improve font loading performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
         {/* Loads custom fonts from Google Fonts */}
         <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&family=Handjet:wght@100..900&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className={inter.className}>
         {/* Renders the header component for navigation */}
         <Header />
         {/* Renders the child components or pages passed into the layout */}
-        <main>
+        <main className="container mx-auto px-4 py-8">
           {children}
         </main>
       </body>

@@ -24,7 +24,9 @@ export async function getProducts({ page = 1, limit = 20, search = '', category 
         params.append('order', 'desc');
     }
 
-    const response = await fetch(`${API_BASE_URL}/products?${params.toString()}`);
+    const response = await fetch(`${API_BASE_URL}/products?${params.toString()}`, {
+        next: { revalidate: 60 } // Cache for 60 seconds
+    });
 
     // Check if the response is successful, throw error if not
     if (!response.ok) {
@@ -44,7 +46,9 @@ export async function getProducts({ page = 1, limit = 20, search = '', category 
  */
 export async function getProductById(id) {
     // Fetch the product by its ID from the API
-    const response = await fetch(`${API_BASE_URL}/products/${id}`);
+    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+        next: { revalidate: 3600 } // Cache for 1 hour
+    });
 
     // Check if the response is successful, throw error if not
     if (!response.ok) {
@@ -56,7 +60,9 @@ export async function getProductById(id) {
 }
 
 export async function getCategories() {
-    const response = await fetch(`${API_BASE_URL}/categories`);
+    const response = await fetch(`${API_BASE_URL}/categories`, {
+        next: { revalidate: 86400 } // Cache for 24 hours
+    });
 
     if (!response.ok) {
         throw new Error('Failed to fetch categories');
