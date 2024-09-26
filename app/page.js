@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getProducts, getCategories } from './lib/api';
@@ -19,9 +21,9 @@ import Loading from './loading';
  * @param {string} [props.searchParams.page] - The current page number for pagination. Defaults to 1 if not provided.
  * @returns {JSX.Element} A JSX element that includes the product grid, pagination controls, and error handling.
  */
-export default async function Home({ searchParams }) {
+export default function Home({ searchParams }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const queryParams = useSearchParams();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,10 +59,8 @@ export default async function Home({ searchParams }) {
       try {
         const fetchedCategories = await getCategories();
         setCategories(fetchedCategories);
-        setIsLoading(false);
       } catch (err) {
         setError('Failed to fetch categories');
-        setIsLoading(false);
       }
     }
 
