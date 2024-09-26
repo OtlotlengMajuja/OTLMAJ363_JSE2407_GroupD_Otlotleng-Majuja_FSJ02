@@ -1,25 +1,20 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
-export default function FilterByCategory({ initialValue }) {
-    const [category, setCategory] = useState(initialValue);
-    const router = useRouter();
-
-    useEffect(() => {
-        router.push(`/?category=${encodeURIComponent(category)}`);
-    }, [category, router]);
+export function FilterByCategory({ categories, selectedCategory, onCategoryChange }) {
+    const safeCategories = Array.isArray(categories) ? categories : [];
 
     return (
         <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="p-2 border rounded mb-4"
+            value={selectedCategory}
+            onChange={(e) => onCategoryChange(e.target.value)}
+            className="p-2 border rounded-md"
         >
             <option value="">All Categories</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            {/* Add more categories as needed */}
+            {safeCategories.map((category) => (
+                <option key={category} value={category}>
+                    {category}
+                </option>
+            ))}
         </select>
     );
 }

@@ -11,8 +11,9 @@ import Reviews from '@/app/components/reviews';
  * @param {string} props.params.id - The ID of the product to be displayed.
  * @returns {JSX.Element} The product detail page, including product images, details, reviews, and error handling.
  */
-export default async function ProductPage({ params }) {
+export default async function ProductPage({ params, searchParams }) {
     const { id } = params;  // Extract product ID from URL parameters
+    const { reviewSort } = searchParams;
     let product;
     let error;
 
@@ -28,10 +29,26 @@ export default async function ProductPage({ params }) {
         return <div className="text-red-500 text-center p-4">Error: {error}</div>;
     }
 
+    // Sort reviews based on the reviewSort parameter
+    const sortedReviews = [...product.reviews].sort((a, b) => {
+        if (reviewSort === 'date') {
+            return new Date(b.date) - new Date(a.date);
+        } else if (reviewSort === 'rating') {
+            return b.rating - a.rating;
+        }
+        return 0;
+    });
+
+    const buildBackLink = () => {
+        const params = new URLSearchParams(searchParams);
+        params.delete('reviewSort'); // Remove reviewSort parameter
+        return `/?${params.toString()}`;
+    };
+
     return (
         <div className="py-12">
             {/* Link back to products listing */}
-            <Link href="/" className="flex items-center space-x-2 text-green-600 hover:text-green-800 mb-8 transition-colors duration-300">
+            <Link href={buildBackLink()} className="flex items-center space-x-2 text-green-600 hover:text-green-800 mb-8 transition-colors duration-300">
                 <button className='bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors duration-300 mt-4 ml-2'>Back to products</button>
             </Link>
 
@@ -83,7 +100,7 @@ export default async function ProductPage({ params }) {
                 </div>
 
                 {/* Render customer reviews using the Reviews component */}
-                <Reviews reviews={product.reviews} />
+                <Reviews reviews={sortedReviews} />
             </div>
         </div>
     );

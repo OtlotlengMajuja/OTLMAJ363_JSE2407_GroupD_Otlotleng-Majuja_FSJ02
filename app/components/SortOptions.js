@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function SortOptions({ initialValue }) {
+export default function SortOptions({ initialValue, onSortChange }) {
     const [sort, setSort] = useState(initialValue);
     const router = useRouter();
 
@@ -12,8 +12,8 @@ export default function SortOptions({ initialValue }) {
 
     return (
         <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
+            value={initialValue}
+            onChange={(e) => onSortChange(e.target.value)}
             className="p-2 border rounded mb-4"
         >
             <option value="">Sort by</option>

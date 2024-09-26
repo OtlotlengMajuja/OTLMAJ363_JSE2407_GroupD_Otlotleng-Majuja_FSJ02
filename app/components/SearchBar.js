@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function SearchBar({ initialValue }) {
+export default function SearchBar({ initialValue, onSearchChange }) {
     const [search, setSearch] = useState(initialValue);
     const router = useRouter();
 
@@ -15,8 +15,8 @@ export default function SearchBar({ initialValue }) {
         <form onSubmit={handleSubmit} className="mb-4">
             <input
                 type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={initialValue}
+                onChange={(e) => onSearchChange(e.target.value)}
                 placeholder="Search products..."
                 className="p-2 border rounded"
             />

@@ -1,3 +1,7 @@
+'use client'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 /**
  * Reviews component that displays a list of customer reviews for a product.
  *
@@ -11,9 +15,29 @@
  * @returns {JSX.Element} A list of customer reviews, including reviewer name, date, rating, and comment.
  */
 export default function Reviews({ reviews }) {
+    const router = useRouter();
+    const [sortOption, setSortOption] = useState('');
+
+    const handleSortChange = (e) => {
+        const newSortOption = e.target.value;
+        setSortOption(newSortOption);
+        router.push(`?reviewSort=${newSortOption}`, { scroll: false });
+    };
+
     return (
         <div className="mt-12 p-8 border-t">
-            <h3 className="text-xl font-bold mb-4 text-green-800">Customer reviews:</h3>
+            <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold mb-4 text-green-800">Customer reviews:</h3>
+                <select
+                    value={sortOption}
+                    onChange={handleSortChange}
+                    className="p-2 border rounded"
+                >
+                    <option value="">Sort by</option>
+                    <option value="date">Most Recent</option>
+                    <option value="rating">Rating</option>
+                </select>
+            </div>
             <div className="space-y-6">
                 {/* Map over the reviews array and render each review */}
                 {reviews.map((review, index) => (
@@ -37,5 +61,6 @@ export default function Reviews({ reviews }) {
                 ))}
             </div>
         </div>
+
     );
 }
