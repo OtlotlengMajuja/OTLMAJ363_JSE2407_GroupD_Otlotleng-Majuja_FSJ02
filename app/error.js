@@ -10,11 +10,13 @@
  */
 export default function Error({ error, reset }) {
     return (
-        <div className="text-center">
-            <h2 className="font-bold">Something went wrong..</h2>
-            <p>{error.message}</p>
-            {/* Button to retry the operation */}
-            <button onClick={reset} className="font-bold">Please try again later</button>
+        <div className="container mx-auto px-4 flex items-center justify-center min-h-screen">
+            <div className="card p-8 text-center">
+                <h2 className="text-2xl font-bold text-primary mb-4">Something went wrong..</h2>
+                <p className="text-secondary mb-6">{error.message}</p>
+                {/* Button to retry the operation */}
+                <button onClick={reset} className="btn btn-primary">Please try again later</button>
+            </div>
         </div>
     );
 }

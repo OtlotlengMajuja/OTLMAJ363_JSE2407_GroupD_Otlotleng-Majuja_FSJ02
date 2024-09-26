@@ -8,7 +8,7 @@ import Link from 'next/link';
  */
 export default function Header() {
     return (
-        <header className="bg-green-800 shadow-md">
+        <header className="bg-primary shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
                 {/* Logo and link to the home page */}
                 <Link href="/" className="flex items-center">
@@ -18,17 +18,17 @@ export default function Header() {
                 <nav>
                     <ul className="flex space-x-6">
                         <li>
-                            <Link href="/" className="text-white hover:text-green-200 transition-colors duration-300">
+                            <Link href="/" className="text-white hover:text-primary-dark transition-colors duration-300">
                                 Home
                             </Link>
                         </li>
                         <li>
-                            <Link href="/about" className="text-white hover:text-green-200 transition-colors duration-300">
+                            <Link href="/about" className="text-white hover:text-primary-dark transition-colors duration-300">
                                 About Us
                             </Link>
                         </li>
                         <li>
-                            <Link href="/cart" className="text-white hover:text-green-200 transition-colors duration-300">
+                            <Link href="/cart" className="text-white hover:text-primary-dark transition-colors duration-300">
                                 Cart
                             </Link>
                         </li>

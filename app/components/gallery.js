@@ -57,7 +57,7 @@ export default function ImageGallery({ images }) {
                     {/* Button to go to the previous image */}
                     <button
                         onClick={prevImage}
-                        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-green-600 text-white p-3 rounded-full hover:bg-green-700 transition-colors duration-300"
+                        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-primary text-white p-3 rounded-full hover:bg-black transition-colors duration-300"
                         aria-label="Previous image"
                     >
                         &#8592;
@@ -66,7 +66,7 @@ export default function ImageGallery({ images }) {
                     {/* Button to go to the next image */}
                     <button
                         onClick={nextImage}
-                        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-green-600 text-white p-3 rounded-full hover:bg-green-700 transition-colors duration-300"
+                        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-primary text-white p-3 rounded-full hover:bg-black transition-colors duration-300"
                         aria-label="Next image"
                     >
                         &#8594;

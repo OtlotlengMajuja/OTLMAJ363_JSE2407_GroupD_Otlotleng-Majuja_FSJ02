@@ -45,7 +45,7 @@ export function ResetFilters({ onReset }) {
     return (
         <button
             onClick={onReset}
-            className="mb-4 p-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300"
+            className="bg-primary text-white px-4 py-2 rounded hover:bg-black transition-colors duration-300 mt-4 ml-2"
         >
             Reset All Filters
         </button>

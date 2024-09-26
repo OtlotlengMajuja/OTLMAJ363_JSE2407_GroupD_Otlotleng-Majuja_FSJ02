@@ -51,7 +51,7 @@ export default function ProductCard({ product }) {
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Link to the product details page */}
             <Link href={buildProductLink()}>
-                <div className="relative object-contain">
+                <div className="relative">
                     {/* Display the current image of the product */}
                     <Image
                         src={product.images[currentImageIndex] || product.thumbnail}
@@ -82,13 +82,13 @@ export default function ProductCard({ product }) {
                 {/* Product details */}
                 <div className="p-4">
                     <h2 className="text-xl font-bold mb-4 text-black">{product.title}</h2>
-                    <p className="inline-block font-semibold bg-green-700 rounded-full px-3 py-1 text-sm text-white mr-2 mb-2">
+                    <p className="inline-block font-semibold bg-primary rounded-full px-3 py-1 text-sm text-white mr-2 mb-2">
                         {product.category}
                     </p>
                     <span className="text-sm text-black">Rating: {product.rating}/5</span>
                     <div className="flex justify-between items-center">
                         <span className="text-2xl font-bold text-black">R{product.price.toFixed(2)}</span>
-                        <button className="bg-green-700 text-white px-4 py-2 rounded hover:bg-black transition-colors duration-300 mt-4 ml-2">
+                        <button className="bg-primary text-white px-4 py-2 rounded hover:bg-black transition-colors duration-300 mt-4 ml-2">
                             View Details
                         </button>
                     </div>

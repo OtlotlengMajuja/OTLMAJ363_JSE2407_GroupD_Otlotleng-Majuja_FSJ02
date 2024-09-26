@@ -27,11 +27,11 @@ export default function Reviews({ reviews }) {
     return (
         <div className="mt-12 p-8 border-t">
             <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold mb-4 text-green-800">Customer reviews:</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">Customer reviews:</h3>
                 <select
                     value={sortOption}
                     onChange={handleSortChange}
-                    className="p-2 border rounded"
+                    className="p-2 border rounded-md text-secondary"
                 >
                     <option value="">Sort by</option>
                     <option value="date">Most Recent</option>
@@ -41,10 +41,10 @@ export default function Reviews({ reviews }) {
             <div className="space-y-6">
                 {/* Map over the reviews array and render each review */}
                 {reviews.map((review, index) => (
-                    <div key={index} className="bg-white rounded-lg shadow-md p-6 transition-transform duration-300 hover:scale-105">
+                    <div key={index} className="card rounded-lg shadow-md p-6 transition-transform duration-300 hover:scale-105">
                         <div className="flex justify-between items-center mb-4">
                             <span className="font-semibold text-lg text-black">{review.reviewerName}</span>
-                            <span className="text-sm text-green-600">
+                            <span className="text-sm text-primary">
                                 {new Date(review.date).toLocaleDateString('en-GB')}
                             </span>
                         </div>
@@ -53,7 +53,7 @@ export default function Reviews({ reviews }) {
                             <div className="text-black-500 mr-2">
                                 {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
                             </div>
-                            <span className="text-green-700">{review.rating} / 5</span>
+                            <span className="text-primary">{review.rating} / 5</span>
                         </div>
                         {/* Display the review comment */}
                         <p className="text-black">{review.comment}</p>
