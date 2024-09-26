@@ -4,6 +4,7 @@ import Pagination from './components/Pagination';
 import SearchBar from './components/SearchBar';
 import FilterByCategory from './components/FilterCategory';
 import SortOptions from './components/SortOptions';
+import ResetFilters from './components/ResetFilters';
 import { Suspense } from 'react';
 
 /**
@@ -37,15 +38,18 @@ export default async function Home({ searchParams }) {
     return <div className="text-red-600 text-center p-4 bg-red-100 rounded-lg">Error: {error}</div>;
   }
 
+  const hasFilters = search || category || sort;
+
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
         <SearchBar initialValue={search} />
         <FilterByCategory initialValue={category} />
         <SortOptions initialValue={sort} />
+        {hasFilters && <ResetFilters />}
         {/* Render the product grid and pagination controls */}
         <ProductGrid products={products} />
-        <Pagination currentPage={page} hasMore={products.length === 20} />
+        <Pagination currentPage={page} hasMore={products.length === limit} search={search} category={category} sort={sort} />
       </Suspense>
     </div>
   );

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 /**
  * ProductCard component displays a product with an image carousel, title, price, and other details.
@@ -14,6 +15,7 @@ import { useState } from 'react';
 export default function ProductCard({ product }) {
     // State to track the current image index in the product's image array
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const searchParams = useSearchParams();
 
     /**
      * Navigate to the next image in the carousel.
@@ -39,10 +41,16 @@ export default function ProductCard({ product }) {
         );
     };
 
+    const buildProductLink = () => {
+        const params = new URLSearchParams(searchParams);
+        params.delete('page'); // Remove page parameter
+        return `/product/${product.id}?${params.toString()}`;
+    };
+
     return (
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Link to the product details page */}
-            <Link href={`/product/${product.id}`}>
+            <Link href={buildProductLink()}>
                 <div className="relative">
                     {/* Display the current image of the product */}
                     <Image
