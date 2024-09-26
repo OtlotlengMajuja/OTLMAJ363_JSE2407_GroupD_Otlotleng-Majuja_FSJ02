@@ -6,9 +6,7 @@ import { getProducts, getCategories } from './lib/api';
 import ProductGrid from './components/ProductGrid';
 import Pagination from './components/Pagination';
 import SearchBar from './components/SearchBar';
-import { FilterByCategory } from './components/FilterCategory';
-import SortOptions from './components/SortOptions';
-import ResetFilters from './components/ResetFilters';
+import { FilterByCategory, SortOptions, ResetFilters } from './components/FilterSort';
 import Error from './error';
 import Loading from './loading';
 
