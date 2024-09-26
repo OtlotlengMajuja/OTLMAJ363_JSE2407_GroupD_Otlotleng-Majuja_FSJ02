@@ -1,27 +1,20 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getProducts, getCategories } from './lib/api';
 import ProductGrid from './components/ProductGrid';
 import Pagination from './components/Pagination';
 import SearchBar from './components/SearchBar';
-import FilterByCategory from './components/FilterCategory';
+import { FilterByCategory } from './components/FilterCategory';
 import SortOptions from './components/SortOptions';
 import ResetFilters from './components/ResetFilters';
 import Error from './error';
 import Loading from './loading';
 
-/**
- * Home component that fetches and displays a grid of products and pagination controls.
- * It handles errors and loading states while fetching the product data.
- *
- * @param {Object} props - The properties passed to the Home component.
- * @param {Object} props.searchParams - The search parameters from the URL, including pagination information.
- * @param {string} [props.searchParams.page] - The current page number for pagination. Defaults to 1 if not provided.
- * @returns {JSX.Element} A JSX element that includes the product grid, pagination controls, and error handling.
- */
-export default function Home({ searchParams }) {
+export default function Home() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); // Use the hook to get URL search parameters
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

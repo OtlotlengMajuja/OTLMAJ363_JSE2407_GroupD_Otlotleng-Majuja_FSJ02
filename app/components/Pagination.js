@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 /**
  * Pagination component that provides navigation links for paginated content.
  * It displays "Previous" and "Next" buttons based on the current page and availability of more pages.
