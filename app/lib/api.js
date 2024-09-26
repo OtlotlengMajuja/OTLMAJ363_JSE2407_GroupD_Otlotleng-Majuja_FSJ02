@@ -8,11 +8,23 @@ const API_BASE_URL = 'https://next-ecommerce-api.vercel.app';
  * @returns {Promise<Object>} The product data in JSON format.
  * @throws {Error} If the request fails or the response is not OK.
  */
-export async function getProducts(page = 1, limit = 20) {
-    const skip = (page - 1) * limit;
+export async function getProducts({ page = 1, limit = 20, search = '', category = '', sort = '' }) {
+    const params = new URLSearchParams({
+        limit: limit.toString(),
+        skip: ((page - 1) * limit).toString(),
+        q: search,
+        category,
+    });
 
-    // Fetch products from the API with pagination
-    const response = await fetch(`${API_BASE_URL}/products?limit=${limit}&skip=${skip}`);
+    if (sort === 'price_asc') {
+        params.append('sort', 'price');
+        params.append('order', 'asc');
+    } else if (sort === 'price_desc') {
+        params.append('sort', 'price');
+        params.append('order', 'desc');
+    }
+
+    const response = await fetch(`${API_BASE_URL}/products?${params.toString()}`);
 
     // Check if the response is successful, throw error if not
     if (!response.ok) {

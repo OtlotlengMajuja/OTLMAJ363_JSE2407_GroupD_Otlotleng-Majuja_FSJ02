@@ -1,6 +1,6 @@
 import { getProducts } from './lib/api';
-import ProductGrid from './components/productGrid';
-import Pagination from './components/pagination';
+import ProductGrid from './components/ProductGrid';
+import Pagination from './components/Pagination';
 import { Suspense } from 'react';
 
 /**
