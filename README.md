@@ -1,17 +1,19 @@
-# FSJ01 Challenge 1 - Shopporium
+# FSJ02 Challenge 2 - Shopporium Continued
 
 ## Project Brief
 
-The goal of the e-commerce platform Shopporium is to give customers a flawless purchasing experience. The site has an easy-to-use design that manages user evaluations, displays products, and allows for pagination for quick browsing. To guarantee performance, maintainability, and responsiveness, the application makes use of contemporary web technologies.
+This e-commerce project is a full-stack application designed to provide a seamless online shopping experience. It allows users to browse a wide range of products, filter and sort them based on various criteria, and manage their shopping cart efficiently. The project utilizes modern web technologies and frameworks to create a responsive and user-friendly interface.
 
 ## Overview
 
-With Shopporium, customers can:
+The application includes features such as:
 
-- See a grid of products featuring ratings, prices, titles, and photos.
-- Browse through product details, such as categories, reviews, and descriptions.
-- To view numerous product pages, use the pagination controls.
-- Get feedback in the event that the data fetching process fails.
+- Product listing with filtering and sorting options.
+- A detailed product page with images, descriptions, ratings, and reviews.
+- A search bar for quick product searches.
+- Pagination to navigate through large sets of products.
+- Dynamic filtering by category and sorting by price or rating.
+- Responsive design for optimal viewing on various devices.
 
 Next.js and React are used in the application's construction, utilizing both client-side and server-side rendering for maximum efficiency. For styling, Tailwind CSS is also used, giving it a sleek and contemporary appearance.
 
@@ -19,8 +21,11 @@ Next.js and React are used in the application's construction, utilizing both cli
 
 - **Next.js:** A React framework for server-side rendering and static site generation.
 - **React:** A JavaScript library for building user interfaces.
+- **API**: Consuming a RESTful API hosted at `https://next-ecommerce-api.vercel.app` for product data.
 - **Tailwind CSS:** A utility-first CSS framework for designing responsive layouts.
+- **React Hooks**: For managing local component state and side effects.
 - **JSDoc:** For documenting the JavaScript code.
+- **Next.js Routing**: For client-side navigation and dynamic routing based on product IDs.
 
 ## Setup Instructions
 
@@ -28,33 +33,34 @@ Next.js and React are used in the application's construction, utilizing both cli
 
 1. **Clone the repository:** Open your terminal and select powershell, then:
 
-   - git clone `https://github.com/OtlotlengMajuja/JSF-Portfolio_Piece_OTLMAJ363_JSE2401_GroupD_Otlotleng-Majuja_JSF04.git`
+   - git clone `https://github.com/OtlotlengMajuja/OTLMAJ363_JSE2407_GroupD_Otlotleng-Majuja_FSJ02.git`
    - cd shopporium
 
 2. **Install dependencies:** Make sure you have Node.js installed, then run:
+
    - `npm install`
-   -
-3. **Configure environment variables:** Create a .`env.local` file in the root of the project and add your environment variables:
 
-   - NEXT_PUBLIC_API_BASE_URL=https://next-ecommerce-api.vercel.app
-
-4. **Running the project**
+3. **Running the project**
    - to start the development server run `npm run dev`
 
 ## Usage Examples
 
-### Home Page
+### Searching for Products
 
-The home page displays a grid of products retrieved from the API. It has pagination controls so you can go between the various product pages.
+To search for products, use the search bar at the top of the home page. As you type, the product list will dynamically update to show matching products.
 
-### Product Page
+### Filtering by Category
 
-The product page offers comprehensive details on a chosen item, such as images, a description, a price, a category, and customer review.
+Select a category from the available options to filter products displayed on the home page.
 
-### Error Handling
+### Sorting Products
 
-If there is an issue fetching data, an error message will be displayed.
+Choose a sorting option (e.g., by price or rating) to change the order of products in the list.
 
-### Loading State
+### Pagination
 
-While data is being fetched, a loading spinner and message are shown to inform users that content is loading.
+Navigate through pages of products using the pagination controls at the bottom of the product grid.
+
+### Viewing Product Details
+
+Click on a product to view its detailed page, which includes images, descriptions, ratings, and user reviews.
