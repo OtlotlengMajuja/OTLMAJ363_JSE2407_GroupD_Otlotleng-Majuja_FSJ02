@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { getProducts, getCategories } from './lib/api';
 import ProductGrid from './components/ProductGrid';
 import Pagination from './components/Pagination';
-import SearchBar from './components/SearchBar';
 import { FilterByCategory, SortOptions, ResetFilters } from './components/FilterSort';
 import Error from './error';
 import Loading from './loading';
@@ -19,6 +18,9 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
 
+  const [sortBy, setSortBy] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const [category, setCategory] = useState(searchParams.get('category') || '');
@@ -26,10 +28,14 @@ export default function Home() {
 
   const limit = 20;
 
+  useEffect(() => {
+    fetchProducts();
+  }, [page, search, category, sort]);
+
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const data = await getProducts({ page, limit, search, category, sort });
+      const data = await getProducts({ page, limit, search, category, sort: `${sortBy}_${sortOrder}` });
       setProducts(data);
       setError(null);
     } catch (err) {
@@ -38,10 +44,6 @@ export default function Home() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchProducts();
-  }, [page, search, category, sort]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -76,8 +78,9 @@ export default function Home() {
     setPage(1);
   };
 
-  const handleSortChange = (newSort) => {
-    setSort(newSort);
+  const handleSortChange = (newSortBy, newSortOrder) => {
+    setSortBy(newSortBy);
+    setSortOrder(newSortOrder);
     setPage(1);
   };
 
@@ -104,9 +107,6 @@ export default function Home() {
 
       <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
         <div className="w-full sm:w-auto">
-          <SearchBar initialValue={search} onSearchChange={handleSearchChange} />
-        </div>
-        <div className="w-full sm:w-auto">
           <FilterByCategory
             categories={categories}
             selectedCategory={category}
@@ -114,7 +114,11 @@ export default function Home() {
           />
         </div>
         <div className="w-full sm:w-auto">
-          <SortOptions initialValue={sort} onSortChange={handleSortChange} />
+          <SortOptions
+            currentSortBy={sortBy}
+            currentSortOrder={sortOrder}
+            onSortChange={handleSortChange}
+          />
         </div>
         {hasFilters && (
           <div className="w-full sm:w-auto">

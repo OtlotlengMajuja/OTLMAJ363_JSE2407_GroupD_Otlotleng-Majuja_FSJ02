@@ -16,12 +16,10 @@ export async function getProducts({ page = 1, limit = 20, search = '', category 
         category,
     });
 
-    if (sort === 'price_asc') {
-        params.append('sort', 'price');
-        params.append('order', 'asc');
-    } else if (sort === 'price_desc') {
-        params.append('sort', 'price');
-        params.append('order', 'desc');
+    if (sort) {
+        const [sortBy, sortOrder] = sort.split('_');
+        params.append('sort', sortBy);
+        params.append('order', sortOrder);
     }
 
     const response = await fetch(`${API_BASE_URL}/products?${params.toString()}`, {

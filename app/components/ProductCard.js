@@ -52,14 +52,16 @@ export default function ProductCard({ product }) {
             {/* Link to the product details page */}
             <Link href={buildProductLink()}>
                 <div className="relative">
-                    {/* Display the current image of the product */}
-                    <Image
-                        src={product.images[currentImageIndex] || product.thumbnail}
-                        alt={product.title}
-                        width={250}
-                        height={250}
-                        objectFit="cover"
-                    />
+                    <div className="md:w-1/2">
+                        {/* Display the current image of the product */}
+                        <Image
+                            src={product.images[currentImageIndex] || product.thumbnail}
+                            alt={product.title}
+                            width={250}
+                            height={250}
+                            objectFit="cover"
+                        />
+                    </div>
                     {/* Image navigation buttons */}
                     {product.images.length > 1 && (
                         <>

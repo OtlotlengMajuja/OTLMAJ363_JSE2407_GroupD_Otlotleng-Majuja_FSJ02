@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 /**
  * Header component for the e-commerce site.
@@ -7,6 +11,14 @@ import Link from 'next/link';
  * @returns {JSX.Element} The header component with a logo and navigation links.
  */
 export default function Header() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const router = useRouter();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        router.push(`/?search=${encodeURIComponent(searchTerm)}`);
+    };
+
     return (
         <header className="bg-primary shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -15,6 +27,15 @@ export default function Header() {
                     <span className="font-['Anek_Devanagari'] text-3xl text-white">Shopporium</span>
                 </Link>
                 {/* Navigation links */}
+                <form onSubmit={handleSearch} className="flex-grow max-w-md mx-4">
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Search products..."
+                        className="w-full px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-dark"
+                    />
+                </form>
                 <nav>
                     <ul className="flex space-x-6">
                         <li>

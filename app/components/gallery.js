@@ -14,6 +14,10 @@ export default function ImageGallery({ images }) {
     // State to track the currently displayed image
     const [currentImage, setCurrentImage] = useState(0);
 
+    if (!images || images.length === 0) {
+        return <div className="p-4">No images available</div>;
+    }
+
     /**
      * Move to the next image in the gallery.
      * If on the last image, it loops back to the first image.
@@ -40,18 +44,16 @@ export default function ImageGallery({ images }) {
     };
 
     return (
-        <div className="relative">
-            <div className="aspect-w-16 aspect-h-9 relative">
-                {/* Main image display */}
-                <Image
-                    src={images[currentImage]}
-                    alt="Product"
-                    layout='fill'
-                    objectFit="cover"
-                    className="rounded-lg shadow-md"
-                    priority
-                />
-            </div>
+        <div className="relative w-full h-96">
+            {/* Main image display */}
+            <Image
+                src={images[currentImage]}
+                alt={`Product image ${currentImage + 1}`}
+                layout='fill'
+                objectFit="contain"
+                className="rounded-lg"
+                priority
+            />
             {images.length > 1 && (
                 <>
                     {/* Button to go to the previous image */}

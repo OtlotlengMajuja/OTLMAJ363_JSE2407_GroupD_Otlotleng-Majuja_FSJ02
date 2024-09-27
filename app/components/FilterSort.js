@@ -30,7 +30,7 @@ export function SortOptions({ currentSortBy, currentSortOrder, onSortChange }) {
         <select
             value={`${currentSortBy}-${currentSortOrder}`}
             onChange={handleSortChange}
-            className="p-2 border rounded"
+            className="p-2 border rounded-md"
         >
             <option value="">Sort by</option>
             <option value="price_asc">Price: Low to High</option>
@@ -45,7 +45,7 @@ export function ResetFilters({ onReset }) {
     return (
         <button
             onClick={onReset}
-            className="bg-primary text-white px-4 py-2 rounded hover:bg-black transition-colors duration-300 mt-4 ml-2"
+            className="bg-primary text-white p-2 rounded-md hover:bg-black transition-colors duration-300"
         >
             Reset All Filters
         </button>
