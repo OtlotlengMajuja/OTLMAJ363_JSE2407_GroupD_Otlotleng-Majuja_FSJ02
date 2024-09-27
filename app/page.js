@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { getProducts, getCategories } from './lib/api';
 import ProductGrid from './components/ProductGrid';
 import Pagination from './components/Pagination';
-import { FilterByCategory, SortOptions, ResetFilters } from './components/FilterSort';
+import FilterSort from './components/FilterSort';
 import Error from './error';
 import Loading from './loading';
 
@@ -84,14 +84,14 @@ export default function Home() {
     setPage(1);
   };
 
-  const handleResetFilters = () => {
-    setSearch('');
-    setCategory('');
-    setSort('');
-    setPage(1);
-  };
+  // const handleResetFilters = () => {
+  //   setSearch('');
+  //   setCategory('');
+  //   setSort('');
+  //   setPage(1);
+  // };
 
-  const hasFilters = search || category || sort;
+  // const hasFilters = search || category || sort;
 
   if (error) {
     return <Error error={error} reset={fetchProducts} />;
@@ -107,28 +107,20 @@ export default function Home() {
 
       <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
         <div className="w-full sm:w-auto">
-          <FilterByCategory
+          <FilterSort
             categories={categories}
-            selectedCategory={category}
+            selectedCategory={selectedCategory}
             onCategoryChange={handleCategoryChange}
-          />
-        </div>
-        <div className="w-full sm:w-auto">
-          <SortOptions
             currentSortBy={sortBy}
             currentSortOrder={sortOrder}
             onSortChange={handleSortChange}
+            onReset={handleReset}
           />
         </div>
-        {hasFilters && (
-          <div className="w-full sm:w-auto">
-            <ResetFilters onReset={handleResetFilters} />
-          </div>
-        )}
       </div>
 
       {/* Render the product grid and pagination controls */}
-      <ProductGrid products={products} />
+      <ProductGrid products={filteredProducts} />
       <Pagination
         currentPage={page}
         hasMore={products.length === limit}

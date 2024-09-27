@@ -1,3 +1,5 @@
+import { cache } from 'react'
+
 const API_BASE_URL = 'https://next-ecommerce-api.vercel.app';
 
 /**
@@ -8,23 +10,30 @@ const API_BASE_URL = 'https://next-ecommerce-api.vercel.app';
  * @returns {Promise<Object>} The product data in JSON format.
  * @throws {Error} If the request fails or the response is not OK.
  */
-export async function getProducts({ page = 1, limit = 20, search = '', category = '', sort = '' }) {
-    const params = new URLSearchParams({
-        limit: limit.toString(),
-        skip: ((page - 1) * limit).toString(),
-        q: search,
-        category,
-    });
+export const getProducts = cache(async (params = {}) => {
+    const {
+        page = 1,
+        limit = 20,
+        search = '',
+        category = '',
+        sortBy = 'price',
+        sortOrder = 'asc',
+    } = params;
 
-    if (sort) {
-        const [sortBy, sortOrder] = sort.split('_');
-        params.append('sort', sortBy);
-        params.append('order', sortOrder);
-    }
+    const skip = (page - 1) * limit;
+    const queryParams = new URLSearchParams({
+        limit: limit.toString(),
+        skip: skip.toString(),
+        search,
+        category,
+        sortBy,
+        order: sortOrder,
+    });
 
     const response = await fetch(`${API_BASE_URL}/products?${params.toString()}`, {
         next: { revalidate: 60 } // Cache for 60 seconds
     });
+
 
     // Check if the response is successful, throw error if not
     if (!response.ok) {
@@ -33,7 +42,7 @@ export async function getProducts({ page = 1, limit = 20, search = '', category 
 
     // Return the response in JSON format
     return response.json();
-}
+})
 
 /**
  * Fetches a specific product by its ID from the e-commerce API.
