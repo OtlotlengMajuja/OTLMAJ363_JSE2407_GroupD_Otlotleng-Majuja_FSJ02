@@ -51,7 +51,7 @@ export default function ProductCard({ product }) {
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Link to the product details page */}
             <Link href={buildProductLink()}>
-                <div className="relative">
+                <div className="relative p-4">
                     <div className="md:w-1/2">
                         {/* Display the current image of the product */}
                         <Image
