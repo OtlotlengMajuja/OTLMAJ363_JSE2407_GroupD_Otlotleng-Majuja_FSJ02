@@ -6,11 +6,20 @@ import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 /**
- * ProductCard component displays a product with an image carousel, title, price, and other details.
+ * ProductCard component displays a product with an image carousel, title, price, category, and rating.
+ * Each card is clickable and navigates to the product details page.
  *
  * @param {Object} props - The properties passed to the ProductCard component.
  * @param {Object} props.product - The product object containing details like id, title, images, price, category, and rating.
- * @returns {JSX.Element} The product card component with product details and image carousel.
+ * @param {number} props.product.id - The unique identifier of the product.
+ * @param {string} props.product.title - The title of the product.
+ * @param {string[]} props.product.images - Array of URLs for the product images.
+ * @param {string} props.product.thumbnail - The thumbnail image for the product.
+ * @param {number} props.product.price - The price of the product.
+ * @param {string} props.product.category - The category the product belongs to.
+ * @param {number} props.product.rating - The product's rating out of 5.
+ * 
+ * @returns {JSX.Element} The product card component with product details and an image carousel.
  */
 export default function ProductCard({ product }) {
     // State to track the current image index in the product's image array
@@ -19,6 +28,7 @@ export default function ProductCard({ product }) {
 
     /**
      * Navigate to the next image in the carousel.
+     * Loops back to the first image if the current image is the last.
      *
      * @param {Event} e - The click event triggered by the user.
      */
@@ -31,6 +41,7 @@ export default function ProductCard({ product }) {
 
     /**
      * Navigate to the previous image in the carousel.
+     * Loops back to the last image if the current image is the first.
      *
      * @param {Event} e - The click event triggered by the user.
      */
@@ -41,6 +52,12 @@ export default function ProductCard({ product }) {
         );
     };
 
+    /**
+     * Builds the product link with current search parameters.
+     * Removes any existing 'page' parameter from the URL to maintain state when navigating.
+     *
+     * @returns {string} The URL string to navigate to the product details page.
+     */
     const buildProductLink = () => {
         const params = new URLSearchParams(searchParams);
         params.delete('page'); // Remove page parameter

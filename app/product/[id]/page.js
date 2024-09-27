@@ -26,9 +26,10 @@ export async function generateMetadata({ params }) {
  * @param {Object} props - The properties passed to the ProductPage component.
  * @param {Object} props.params - The URL parameters containing the product ID.
  * @param {string} props.params.id - The ID of the product to be displayed.
+ * @param {Object} searchParams - Optional search parameters for sorting reviews.
+ * @param {string} [searchParams.reviewSort] - A parameter to sort reviews by 'date' or 'rating'.
  * @returns {JSX.Element} The product detail page, including product images, details, reviews, and error handling.
  */
-
 export default async function ProductPage({ params, searchParams }) {
     const { id } = params;  // Extract product ID from URL parameters
     const { reviewSort } = searchParams;
