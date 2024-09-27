@@ -3,9 +3,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 /**
- * ImageGallery component that displays an image carousel and thumbnails.
+ * ImageGallery component that displays a carousel of images with navigation controls 
+ * and thumbnails for selecting images.
  *
- * @param {Object} props
+ * @param {Object} props - The component props.
  * @param {string[]} props.images - Array of image URLs to display in the gallery.
  * @returns {JSX.Element} The image gallery component.
  */

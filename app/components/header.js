@@ -2,9 +2,10 @@ import Link from 'next/link';
 
 /**
  * Header component for the e-commerce site.
- * This component contains the site logo and a navigation menu with links to different pages.
+ * This component displays the site logo and a navigation menu with links to 
+ * different pages such as Home, About Us, and Cart.
  *
- * @returns {JSX.Element} The header component with a logo and navigation links.
+ * @returns {JSX.Element} The header component containing a logo and navigation links.
  */
 export default function Header() {
     return (
@@ -14,19 +15,23 @@ export default function Header() {
                 <Link href="/" className="flex items-center">
                     <span className="font-['Anek_Devanagari'] text-3xl text-white">Shopporium</span>
                 </Link>
+
                 {/* Navigation links */}
                 <nav>
                     <ul className="flex space-x-6">
+                        {/* Home page link */}
                         <li>
                             <Link href="/" className="text-white hover:text-primary-dark transition-colors duration-300">
                                 Home
                             </Link>
                         </li>
+                        {/* About Us page link */}
                         <li>
                             <Link href="/about" className="text-white hover:text-primary-dark transition-colors duration-300">
                                 About Us
                             </Link>
                         </li>
+                        {/* Cart page link */}
                         <li>
                             <Link href="/cart" className="text-white hover:text-primary-dark transition-colors duration-300">
                                 Cart
